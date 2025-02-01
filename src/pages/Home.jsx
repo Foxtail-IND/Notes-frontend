@@ -6,7 +6,7 @@ import Create from '../components/Create'
 const Home = () => {
     return (
         <PublicLayout>
-            <div className='flex'>
+            <div className='flex w-screen'>
                 <Notes />
                 <Create />
             </div>
