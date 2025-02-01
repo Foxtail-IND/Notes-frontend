@@ -33,7 +33,7 @@ const pages = [
 
 const Sidebar = () => {
     return (
-        <div className='min-h-screen md:w-2/12 w-0 p-4 '>
+        <div className='min-h-screen md:w-2/12 p-4 fixed'>
             <div className='flex justify-center mb-6'>
                 <img src={logo} alt='App logo' className='h-16' />
             </div>
