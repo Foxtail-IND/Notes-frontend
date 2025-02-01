@@ -6,7 +6,7 @@ const PublicLayout = ({ children }) => {
     return (
         <div className=' w-full min-h-screen flex'>
             <Sidebar />
-            <div className='flex flex-col w-screen'>
+            <div className='flex flex-col w-screen min-h-screen'>
                 <Header />
                 {children}
             </div>
