@@ -1,14 +1,11 @@
-import React from 'react';
-
 import { FcGoogle } from "react-icons/fc";
 import Button from '@mui/material/Button';
 import logo from "../assets/logo.png"
 import { Card, CardContent, TextField, Checkbox, FormControlLabel } from "@mui/material";
 
 const Auth = () => {
-    const handleLogin = () => {
-        console.log("loggin in");
-
+    const googleLogin = () => {
+        window.location.href = "http://localhost:8080/oauth2/authorization/google";
     };
 
     return (
@@ -24,7 +21,7 @@ const Auth = () => {
                         Sign in
                     </Button>
                     <div className="text-gray-500 my-2">or</div>
-                    <Button onClick={handleLogin} className="w-full py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 mb-2 gap-x-4">
+                    <Button onClick={googleLogin} className="w-full py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 mb-2 gap-x-4">
                         <FcGoogle className='text-2xl' />
                         Sign in with Google
                     </Button>

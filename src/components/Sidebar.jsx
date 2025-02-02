@@ -10,7 +10,7 @@ import { Link } from 'react-router';
 const pages = [
     {
         name: "Notes",
-        path: "/",
+        path: "/home",
         icon: <FaRegStickyNote />
     },
     {
@@ -25,7 +25,7 @@ const pages = [
     },
     {
         name: "Logout",
-        path: "/logout",
+        path: "http://localhost:8080/logout",
         icon: <IoLogOutOutline />
     },
 ];
@@ -42,7 +42,7 @@ const Sidebar = () => {
                 <ul className='space-y-4 px-2'>
                     {pages.map((page, index) => (
                         <li key={index}>
-                            <Link to={page.path} className='flex items-center space-x-3 py-2 px-2 hover:bg-orange-100 hover:text-black rounded-md'>
+                            <Link to={page.path} className='flex items-center space-x-3 py-2 px-2 hover:bg-[#f8e77b] transition-all ease-in-out rounded-md'>
                                 {page.icon}
                                 <span>{page.name}</span>
                             </Link>

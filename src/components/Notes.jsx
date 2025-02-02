@@ -10,8 +10,8 @@ const Notes = () => {
         <div className='w-8/12 h-[calc(100vh-80px)] mt-19 ml-64 px-8 overflow-y-auto'>
             <div className='flex items-center justify-between pr-2'>
                 <h1 className='text-3xl font-bold py-10'>Notes</h1>
-                <Link to="/home" className=' bg-[#f5f4f4] p-2 rounded-full'>
-                    <LuPlus className='text-xl cursor-pointer' />
+                <Link to="/home" className=' bg-[#f5f4f4] p-3 rounded-full'>
+                    <p>Create</p>
                 </Link>
             </div>
             <div>
