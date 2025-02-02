@@ -7,8 +7,9 @@ function App() {
 
   return (
     <Routes>
-      <Route index path="/" element={<Auth />} />
+      <Route index element={<Auth />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/home/:noteId" element={<Home />} />
     </Routes>
   )
 }
