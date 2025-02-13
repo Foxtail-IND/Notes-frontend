@@ -1,7 +1,7 @@
-import './App.css'
 import { Route, Routes } from 'react-router'
-import Home from './pages/Home'
+import './App.css'
 import Auth from './pages/Auth'
+import Home from './pages/Home'
 
 function App() {
 

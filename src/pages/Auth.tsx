@@ -4,9 +4,9 @@ import logo from "../assets/logo.png"
 import { Card, CardContent, TextField, Checkbox, FormControlLabel } from "@mui/material";
 
 const Auth = () => {
-    const googleLogin = () => {
-        window.location.href = "http://localhost:8080/oauth2/authorization/google";
-    };
+    // const googleLogin = () => {
+    //     window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    // };
 
     return (
         <div className="flex h-screen items-center justify-center bg-gray-100">
@@ -21,7 +21,7 @@ const Auth = () => {
                         Sign in
                     </Button>
                     <div className="text-gray-500 my-2">or</div>
-                    <Button onClick={googleLogin} className="w-full py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 mb-2 gap-x-4">
+                    <Button className="w-full py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 mb-2 gap-x-4">
                         <FcGoogle className='text-2xl' />
                         Sign in with Google
                     </Button>
