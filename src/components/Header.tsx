@@ -1,10 +1,10 @@
 import { CiSearch } from "react-icons/ci";
 import dummy from "../assets/profile.jpg";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Header = () => {
+const Header: React.FC = () => {
     const [showMenu, setShowMenu] = useState(false);
     const notifications = true;
 

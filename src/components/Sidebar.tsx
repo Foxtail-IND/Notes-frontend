@@ -31,7 +31,7 @@ const pages = [
 ];
 
 
-const Sidebar = () => {
+const Sidebar: React.FC = () => {
     return (
         <div className='min-h-screen md:w-2/12 p-4 fixed'>
             <div className='flex justify-center mb-6'>

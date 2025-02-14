@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CreateNote = () => {
+const CreateNote: React.FC = () => {
     return (
         <div>CreateNote</div>
     )

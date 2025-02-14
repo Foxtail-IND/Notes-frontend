@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Random = () => {
+const Random: React.FC = () => {
     return (
         <div>Random</div>
     )

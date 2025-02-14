@@ -1,7 +1,13 @@
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
+import React, { ReactNode } from 'react';
 
-const PublicLayout = ({ children }) => {
+interface PublicLayoutProps {
+    children: ReactNode;
+}
+
+
+const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
     return (
         <div className=' w-full min-h-screen flex'>
             <Sidebar />

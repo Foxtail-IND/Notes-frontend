@@ -1,8 +1,7 @@
 import { Link } from 'react-router';
 import Note from './Note'
-import { LuPlus } from "react-icons/lu";
 
-const Notes = () => {
+const Notes: React.FC = () => {
 
     const notes = [1, 2, 3, 4, 5, 6];
 

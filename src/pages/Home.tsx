@@ -1,8 +1,9 @@
 import PublicLayout from '../layouts/PublicLayout'
 import Notes from '../components/Notes'
 import Create from '../components/Create'
+import React from 'react'
 
-const Home = () => {
+const Home: React.FC = () => {
     return (
         <PublicLayout>
             <div className='flex w-screen'>

@@ -2,8 +2,9 @@ import { useParams } from "react-router"
 import task from "../assets/task.png"
 import { FaRegLightbulb } from "react-icons/fa";
 import { LuPlus } from "react-icons/lu";
+import React from "react";
 
-const Create = () => {
+const Create: React.FC = () => {
 
     const { noteId } = useParams()
 

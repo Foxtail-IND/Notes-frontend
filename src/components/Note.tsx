@@ -1,7 +1,12 @@
 import { useNavigate, useLocation } from 'react-router'
 import { motion } from 'framer-motion'
 
-const Note = ({ noteId }) => {
+
+interface NoteProps {
+    noteId: number
+}
+
+const Note: React.FC<NoteProps> = ({ noteId }) => {
 
     const navigate = useNavigate();
     const location = useLocation();
