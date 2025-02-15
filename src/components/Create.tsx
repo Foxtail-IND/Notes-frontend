@@ -8,9 +8,6 @@ const Create: React.FC = () => {
 
     const { noteId } = useParams()
 
-    console.log(noteId);
-
-
     return (
         <div className=' w-full mr-6 mt-19 p-10'>
             {noteId ? (
