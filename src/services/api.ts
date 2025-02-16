@@ -39,7 +39,7 @@ api.interceptors.request.use(
         if (csrfToken) {
             config.headers["X-XSRF-TOKEN"] = csrfToken;
         }
-        console.log("X-XSRF-TOKEN " + csrfToken);
+        // console.log("X-XSRF-TOKEN " + csrfToken);
         return config;
     },
     (error) => {

@@ -6,11 +6,21 @@ interface NoteProps {
     noteId: number
 }
 
-const Note: React.FC<NoteProps> = ({ noteId }) => {
+const Note: React.FC<NoteProps> = ({ noteId, content }) => {
 
     const navigate = useNavigate();
     const location = useLocation();
     const isSelected = location.pathname === `/home/${noteId}`;
+
+    let parsedContent: string;
+
+    try {
+        const parsed = JSON.parse(content);
+        parsedContent = parsed.content || content; // Extract content if it's a JSON object
+    } catch (error) {
+        parsedContent = content; // If parsing fails, use content as is
+    }
+
 
     return (
         <motion.div
@@ -23,7 +33,7 @@ const Note: React.FC<NoteProps> = ({ noteId }) => {
             <div>
                 <h1 className='text-md font-semibold'>Heading {noteId}</h1>
                 <p className='text-sm text-[#B0B0B0] py-3'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    {parsedContent.substring(0, 100)}...
                 </p>
                 <div className='flex justify-between'>
                     <p className='text-sm'>2 days</p>

@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import api from "../services/api";
+import axios from "axios";
 
 
 
@@ -39,8 +40,27 @@ const Auth: React.FC = () => {
     const onLogin = async () => {
         try {
             setLoading(true);
-            const data = { username, password }
-            const response = await api.post("/auth/public/signin", data);
+
+            const response = await api.post("/auth/public/signin", {
+                username: username,
+                password: password,
+            },);
+
+
+            // const response = await axios.post(
+            //     "http://localhost:8080/auth/public/signin",
+            //     {
+            //         username: username,
+            //         password: password,
+            //     },
+            //     {
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //         },
+            //         withCredentials: true, // Ensures cookies (e.g., JWT or session) are sent if needed
+            //     }
+            // );
+
             //showing success message with react hot toast
             toast.success("Login Successful");
 
