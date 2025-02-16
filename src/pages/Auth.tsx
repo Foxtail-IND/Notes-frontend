@@ -7,7 +7,8 @@ import toast from "react-hot-toast";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import api from "../services/api";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateToken } from "../context/features/user/userSlice";
 
 
 
@@ -16,6 +17,8 @@ const Auth: React.FC = () => {
     const [username, setUsername] = useState<string | undefined>("")
     const [password, setPassword] = useState<string | undefined>("")
     const [jwtToken, setJwtToken] = useState<string | undefined>("")
+
+    const dispatch = useDispatch()
 
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -31,8 +34,7 @@ const Auth: React.FC = () => {
         localStorage.setItem("USER", JSON.stringify(user));
 
         //store the token on the context state  so that it can be shared any where in our application by context provider
-        // setToken(token); //TODO
-
+        dispatch(updateToken(token))
         navigate("/home");
     };
 
@@ -46,26 +48,8 @@ const Auth: React.FC = () => {
                 password: password,
             },);
 
-
-            // const response = await axios.post(
-            //     "http://localhost:8080/auth/public/signin",
-            //     {
-            //         username: username,
-            //         password: password,
-            //     },
-            //     {
-            //         headers: {
-            //             "Content-Type": "application/json",
-            //         },
-            //         withCredentials: true, // Ensures cookies (e.g., JWT or session) are sent if needed
-            //     }
-            // );
-
             //showing success message with react hot toast
             toast.success("Login Successful");
-
-            //reset the input field by using reset() function provided by react hook form after submission
-
 
             if (response.status === 200 && response.data.jwtToken) {
                 setJwtToken(response.data.jwtToken);

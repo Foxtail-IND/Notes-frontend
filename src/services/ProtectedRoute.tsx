@@ -1,23 +1,20 @@
 import { ReactElement, JSX } from "react";
 import { Navigate } from "react-router-dom";
 import type { RootState } from "../context/store";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 interface ProtectedRouteProps {
     children: ReactElement;
     adminPage?: boolean;
+    isAdmin: boolean
 }
 
-const ProtectedRoute = ({ children, adminPage }: ProtectedRouteProps): JSX.Element => {
+const ProtectedRoute = ({ children, adminPage, isAdmin }: ProtectedRouteProps): JSX.Element => {
 
-    // const count = useSelector((state: RootState) => state.counter.value)
-    //  const token = useSelector((state: RootState) =>state.user.token)
+    const token = useSelector((state: RootState) => state.user.token)
 
-    const token = "abc"; // Simulated authentication
-    const isAdmin = false; // Example admin check
-
-    if (token !== "abc") {
+    if (!token) {
         return <Navigate to="/" />;
     }
 

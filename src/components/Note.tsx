@@ -32,9 +32,9 @@ const Note: React.FC<NoteProps> = ({ noteId, content }) => {
         >
             <div>
                 <h1 className='text-md font-semibold'>Heading {noteId}</h1>
-                <p className='text-sm text-[#B0B0B0] py-3'>
-                    {parsedContent.substring(0, 100)}...
-                </p>
+                <div className='text-sm text-[#B0B0B0] py-3'>
+                    {parsedContent.length > 50 ? (<p>{parsedContent.substring(0, 50)}...</p>) : (<p>{parsedContent}</p>)}
+                </div>
                 <div className='flex justify-between'>
                     <p className='text-sm'>2 days</p>
                     <p className='text-sm'>Collaborators</p>

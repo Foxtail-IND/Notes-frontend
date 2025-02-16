@@ -2,14 +2,14 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 
-export interface CounterState {
+export interface UserState {
     token: string | null,
     isAuthenticated: boolean,
     darkMode: boolean,
     dp: string | null
 }
 
-const initialState: CounterState = {
+const initialState: UserState = {
     token: null,
     isAuthenticated: false,
     darkMode: false,

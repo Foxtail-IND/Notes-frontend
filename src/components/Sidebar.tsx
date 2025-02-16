@@ -4,7 +4,7 @@ import logo from "../assets/logo.png"
 import { FaRegStickyNote, FaTasks } from "react-icons/fa";
 import { BsPerson } from "react-icons/bs";
 import { IoLogOutOutline } from "react-icons/io5";
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const pages = [
@@ -23,15 +23,32 @@ const pages = [
         path: "/profile",
         icon: <BsPerson />
     },
-    {
-        name: "Logout",
-        path: "http://localhost:8080/logout",
-        icon: <IoLogOutOutline />
-    },
+    // {
+    //     name: "Logout",
+    //     path: "http://localhost:8080/logout",
+    //     icon: <IoLogOutOutline />
+    // },
 ];
 
 
+
 const Sidebar: React.FC = () => {
+
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        localStorage.removeItem("JWT_TOKEN"); // Updated to remove token from localStorage
+        localStorage.removeItem("USER"); // Remove user details as well
+        localStorage.removeItem("CSRF_TOKEN");
+        localStorage.removeItem("IS_ADMIN");
+        localStorage.removeItem("persist:root");
+        // setToken(null);
+        // setCurrentUser(null);
+        // setIsAdmin(false);
+        navigate("/");
+    };
+
+
     return (
         <div className='min-h-screen md:w-2/12 p-4 fixed'>
             <div className='flex justify-center mb-6'>
@@ -42,12 +59,18 @@ const Sidebar: React.FC = () => {
                 <ul className='space-y-4 px-2'>
                     {pages.map((page, index) => (
                         <li key={index}>
-                            <Link to={page.path} className='flex items-center space-x-3 py-2 px-2 hover:bg-[#f8e77b] transition-all ease-in-out rounded-md'>
+                            <Link to={page.path} className='flex items-center space-x-3 py-2 px-2 hover:bg-[#f8e77b] transition-all ease-in-out rounded-md cursor-pointer'>
                                 {page.icon}
                                 <span>{page.name}</span>
                             </Link>
+
                         </li>
+
                     ))}
+                    <li onClick={handleLogout} className='flex items-center space-x-3 py-2 px-2 hover:bg-[#f8e77b] transition-all ease-in-out rounded-md cursor-pointer'>
+                        <IoLogOutOutline />
+                        <span>Logout</span>
+                    </li>
                 </ul>
             </nav>
         </div>

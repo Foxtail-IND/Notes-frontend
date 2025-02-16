@@ -15,9 +15,6 @@ const Notes: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<boolean | null>(false);
 
-
-    // const notes = [1, 2, 3, 4, 5, 6];
-
     const fetchNotes = async () => {
         setLoading(true);
         setError(null);
@@ -55,7 +52,7 @@ const Notes: React.FC = () => {
         <div className='w-8/12 h-[calc(100vh-80px)] mt-19 ml-64 px-8 overflow-y-auto'>
             <div className='flex items-center justify-between pr-2'>
                 <h1 className='text-3xl font-bold py-10'>Notes</h1>
-                <Link to="/home" className=' bg-[#f5f4f4] p-3 rounded-full'>
+                <Link to="/home" className=' bg-[#f5f4f4] p-3 rounded-full hover:bg-[#f8e77b] transition duration-200'>
                     <p>Create</p>
                 </Link>
             </div>
