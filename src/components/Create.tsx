@@ -2,21 +2,32 @@ import { useParams } from "react-router";
 import task from "../assets/task.png";
 import { FaRegLightbulb } from "react-icons/fa";
 import { MdCircle } from "react-icons/md";
+import { AiOutlineDelete } from "react-icons/ai";
+import { FiEdit2 } from "react-icons/fi";
 import { LuPlus } from "react-icons/lu";
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
+import toast from "react-hot-toast";
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { useDispatch } from "react-redux";
+import { fetchNotes } from "../context/features/notes/notesSlice";
 
 interface Note {
     id: number;
+    title: string,
     content: string;
 }
 
 const Create: React.FC = () => {
     const [note, setNote] = useState<Note | null>(null);
     const { noteId } = useParams<{ noteId: string }>();
+
+    const dispatch = useDispatch()
+
+    const [title, setTitle] = useState<string>("")
+    const [content, setContent] = useState<string>("")
 
     // ✅ Move modal state here
     const [open, setOpen] = useState<boolean>(false);
@@ -44,6 +55,28 @@ const Create: React.FC = () => {
             return note?.content;
         }
     };
+
+
+    // saving notes 
+    const onSaveNote = async () => {
+        try {
+            if (title.length == 0 || content.length == 0) {
+                toast.error("Please fill all the details")
+                return
+            }
+            setContent("")
+            setTitle("")
+            handleClose()
+            await api.post("/notes", { title: title, content: content })
+            dispatch(fetchNotes());
+            toast.success("Note created successfully!");
+
+
+        } catch (error) {
+            toast.error(error);
+
+        }
+    }
 
     return (
         <div className="w-full mr-6 mt-19 p-10">
@@ -80,8 +113,13 @@ const Create: React.FC = () => {
             ) : (
                 note && (
                     <div>
-                        <h1 className="text-2xl font-bold">Notes</h1>
-                        <p>Displaying details for note ID: {note.id}</p>
+                        <div className="flex justify-between items-center">
+                            <h1 className="text-2xl font-bold">{note.title}</h1>
+                            <div className="flex items-center gap-x-3">
+                                <FiEdit2 className=" text-md cursor-pointer" />
+                                <AiOutlineDelete className=" text-xl cursor-pointer text-red-600" />
+                            </div>
+                        </div>
                         <p className="text-gray-400 py-4">{parsedContent()}</p>
                     </div>
                 )
@@ -111,16 +149,16 @@ const Create: React.FC = () => {
                         </div>
 
                         {/* Form */}
-                        <form className="space-y-4">
+                        <div className="space-y-4">
 
 
                             {/* Heading Input */}
                             <input
                                 type="text"
-                                name="heading"
-                                placeholder="Enter heading..."
-                                // value={formData.heading}
-                                // onChange={handleChange}
+                                name="title"
+                                placeholder="Enter note title..."
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
                                 className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                                 required
                             />
@@ -129,22 +167,22 @@ const Create: React.FC = () => {
                             <textarea
                                 name="content"
                                 placeholder="Write your note..."
-                                // value={ }
-                                // onChange={ }
+                                value={content}
+                                onChange={(e) => setContent(e.target.value)}
                                 className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 h-32 resize-none"
                                 required
                             ></textarea>
 
                             {/* Buttons */}
                             <div className="flex justify-end gap-3">
-                                <button type="button" onClick={handleClose} className="px-4 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
+                                <button onClick={handleClose} className=' bg-[#ffffff] px-6 py-2 rounded-full hover:bg-[#d1d1d1] cursor-pointer transition duration-200'>
                                     Cancel
                                 </button>
-                                <button type="submit" className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                                    Save Note
+                                <button onClick={onSaveNote} className=' bg-[#f5f4f4] px-6 py-2 rounded-full hover:bg-[#f8e77b] transition duration-200 cursor-pointer'>
+                                    Save
                                 </button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </Box>
             </Modal>

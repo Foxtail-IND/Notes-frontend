@@ -1,12 +1,15 @@
 import { useNavigate, useLocation } from 'react-router'
 import { motion } from 'framer-motion'
-
+import { formatDistanceToNow } from "date-fns";
 
 interface NoteProps {
-    noteId: number
+    noteId: number,
+    content: string,
+    title: string,
+    updatedDate: string
 }
 
-const Note: React.FC<NoteProps> = ({ noteId, content }) => {
+const Note: React.FC<NoteProps> = ({ noteId, content, title, updatedDate }) => {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -31,12 +34,12 @@ const Note: React.FC<NoteProps> = ({ noteId, content }) => {
             animate={{ opacity: isSelected ? 1 : 0.9 }} // Slight opacity change
         >
             <div>
-                <h1 className='text-md font-semibold'>Heading {noteId}</h1>
+                <h1 className='text-md font-semibold'>{title}</h1>
                 <div className='text-sm text-[#B0B0B0] py-3'>
                     {parsedContent.length > 50 ? (<p>{parsedContent.substring(0, 50)}...</p>) : (<p>{parsedContent}</p>)}
                 </div>
                 <div className='flex justify-between'>
-                    <p className='text-sm'>2 days</p>
+                    <p className='text-sm'>{formatDistanceToNow(new Date(updatedDate.split('.')[0]), { addSuffix: true })}</p>
                     <p className='text-sm'>Collaborators</p>
                 </div>
             </div>

@@ -1,52 +1,51 @@
 import { Link } from 'react-router-dom';
 import Note from './Note'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import api from '../services/api';
-import axios from 'axios';
+import { AppDispatch, RootState } from '../context/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchNotes } from '../context/features/notes/notesSlice';
+import { format } from "date-fns";
 
 interface NoteType {
+    updatedDate: any;
     id: number;
     content: string;
+    title: string
 }
 
 const Notes: React.FC = () => {
 
-    const [notes, setNotes] = useState<NoteType[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<boolean | null>(false);
+    const dispatch = useDispatch<AppDispatch>();
+    const { notes, loading, error } = useSelector((state: RootState) => state.notes);
+    // const [notes, setNotes] = useState<NoteType[]>([]);
+    // const [loading, setLoading] = useState<boolean>(false);
+    // const [error, setError] = useState<boolean | null>(false);
 
-    const fetchNotes = async () => {
-        setLoading(true);
-        setError(null);
-        try {
-            const response = await api.get("/notes");
+    // const fetchNotes = async () => {
+    //     setLoading(true);
+    //     setError(null);
+    //     try {
+    //         const response = await api.get("/notes");
+    //         setNotes(response.data);
+    //         // console.log(response.data);
 
 
-
-            setNotes(response.data);
-            // console.log(response.data);
-
-
-        } catch (error) {
-            setError(error.response.data.message);
-            console.error("Error fetching notes", error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    //     } catch (error) {
+    //         setError(error.response.data.message);
+    //         console.error("Error fetching notes", error);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
 
     useEffect(() => {
-        //calling the function here to fetch all notes
-        fetchNotes();
-    }, []);
+        dispatch(fetchNotes());
+    }, [dispatch]);
 
-    if (error) {
-        // return <Errors message={error} />;
-        console.log(error);
-
-    }
-
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
         <div className='w-8/12 h-[calc(100vh-80px)] mt-19 ml-64 px-8 overflow-y-auto'>
@@ -58,7 +57,7 @@ const Notes: React.FC = () => {
             </div>
             <div>
                 {notes.length > 0 ? (notes.map((note: NoteType) => (
-                    <Note key={note.id} noteId={note.id} content={note.content} />
+                    <Note key={note.id} noteId={note.id} content={note.content} title={note.title} updatedDate={note.updatedDate} />
                 ))) : (
                     <p>Create a Note</p>
                 )}

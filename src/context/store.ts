@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './features/user/userSlice';
+import notesReducer from './features/notes/notesSlice'
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -13,6 +14,7 @@ const persistedUserReducer = persistReducer(persistConfig, userReducer);
 export const store = configureStore({
   reducer: {
     user: persistedUserReducer,
+    notes: notesReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

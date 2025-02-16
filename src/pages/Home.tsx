@@ -7,9 +7,7 @@ import type { RootState } from "../context/store";
 
 const Home: React.FC = () => {
 
-    const token = useSelector((state: RootState) => state.user.token)
-
-    console.log(token);
+    // const token = useSelector((state: RootState) => state.user.token)
 
     return (
         <PublicLayout>
